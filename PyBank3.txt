@@ -1,0 +1,77 @@
+import os
+import csv
+import time
+import datetime
+
+# List of Data Files
+
+
+Data_file = ['1','2']
+
+for file_ToCheck in Data_file:
+    pybank_csv = os.path.join("Resources", "budget_data_" + file_ToCheck + ".csv")
+
+    # Create new CSV
+    new_pybank_csv = os.path.join("output", "budget_data_" + file_ToCheck + ".csv")
+
+
+    # Lists to store data
+    Date = []
+    Revenue = []
+    rev=[]
+    revchange=[]
+    #Ave_ChgRev=[]
+
+
+    with open(pybank_csv, newline="") as csvfile:
+        sum=0
+        
+
+        csvreader= csv.reader(csvfile, delimiter=",")
+        next(csvreader, None)
+        for row in csvreader:
+            # Add date to csv
+            Date.append(row[0])
+            # Add Revenue to csv
+            Revenue.append(row[1])
+           
+            #TotalRevenue.append(int(row[2]).count
+           
+            # Total Revenue calculation
+            sum +=  int(row[1])
+
+
+        for i in range(1,len(Revenue)):
+            revchange.append(int(Revenue[i]) - int(Revenue[i-1]))  
+           
+            #Using functions
+            max_rev_change = max(revchange)
+            min_rev_change = min(revchange)
+            #using functions
+            max_rev_change_date = str(Date[revchange.index(max(revchange))])
+            min_rev_change_date = str(Date[revchange.index(min(revchange))])      
+
+        
+    
+    print("Financial Analysis")
+    print(".........................")
+    print("Total Months: "+ str(len(Date)))
+    print("Total Revenue: $"+ str(sum))
+    print("Avg Rev Change: $"+ str(sum/len(Date)))
+    print("Greatest Increase in Rev was: $"+ str(max_rev_change) + " during " + str(max_rev_change_date)+ ".")
+    print("Greatest Decrease in Rev was: $"+ str(min_rev_change) + " during " + str(min_rev_change_date)+ ".")
+  
+  #  Open the output file
+    with open(new_pybank_csv, 'w', newline="") as csvFile:
+        csvWriter = csv.writer(csvFile, delimiter=',')
+
+        # Write Headers into file
+        
+        csvWriter.writerow(["Financial Analysis"])
+        csvWriter.writerow(["........................."])
+        csvWriter.writerow(["Total Months: "+ str(len(Date))])
+        csvWriter.writerow(["Total Revenue: $"+ str(sum)])
+        csvWriter.writerow(["Avg Rev Change: $"+ str(sum/len(Date))])
+        csvWriter.writerow(["Greatest Increase in Rev was: $"+ str(max_rev_change) + " during " + str(max_rev_change_date)+ "."])
+        csvWriter.writerow(["Greatest Decrease in Rev was: $"+ str(min_rev_change) + " during " + str(min_rev_change_date)+ "."])
+    
