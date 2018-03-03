@@ -9,12 +9,12 @@ import pprint
 Data_file = ['1','2']
 
 for file_ToCheck in Data_file:
-   election_csv = os.path.join("Resources", "election_data_" + file_ToCheck + ".csv")
+    election_csv = os.path.join("Resources", "election_data_" + file_ToCheck + ".csv")
 
 #test files
     #election_csv = os.path.join("Resources", "Book" + file_ToCheck + ".csv")
 
-    # Create new CSV
+# Create new CSV
     new_election_csv = os.path.join("output", "election_data_" + file_ToCheck + ".csv") 
 
     # Lists to store data
@@ -44,7 +44,7 @@ for file_ToCheck in Data_file:
         # Loop through the full candidate list
         for candidate_index in range(len(candidates)):
             vote_counter = votes.count(candidates[candidate_index])
-            if vote_max 
+         #   if vote_max:
             print(str(candidates[candidate_index]) + ":   " + str(vote_counter/total_votes*100) + "%")
 
 
